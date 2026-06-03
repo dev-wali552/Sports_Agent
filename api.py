@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,  #javascript on one domain cannot talk to the server of another domain (same origin poilicy)
                      #without course middleware our api on render cannot talk to the frontend on netlify
-    allow_origins=["*"],   # lock this down to the frontend URL in production
+    allow_origins=["https://tiny-griffin-dfc226.netlify.app/"],   # lock this down to the frontend URL in production
     allow_methods=["*"],
     allow_headers=["*"],
 )
