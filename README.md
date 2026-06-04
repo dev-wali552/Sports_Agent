@@ -1,6 +1,9 @@
-# Sports Agent — AI-Powered Multi-Agent Sports Journalist
+# 🏏🏐🥎Sports Agent — AI-Powered Multi-Agent Sports Journalist🤾‍♂️🏅
 
 A multi-agent system built with **LangGraph** that takes any sports query and automatically researches the web, then writes a clean article — all powered by **Groq's Llama 3.1** and served through a **FastAPI** backend.
+
+**LIVE DEMO: [https://tiny-griffin-dfc226.netlify.app](https://tiny-griffin-dfc226.netlify.app)**
+**API: [https://sports-agent-2k73.onrender.com/](https://sports-agent-2k73.onrender.com/)**
 
 ---
 
