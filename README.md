@@ -54,7 +54,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for a full breakdown of each file.
 | Layer | Technology |
 |---|---|
 | Agent Framework | LangGraph |
-| LLM | Groq — `llama-3.1-8b-instant` |
+| LLM | Groq — `llama-3.3-70b-versatile` |
 | Web Search | Tavily Search API |
 | API Server | FastAPI |
 | Memory | LangGraph MemorySaver (in-memory) |
