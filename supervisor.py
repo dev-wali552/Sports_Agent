@@ -9,12 +9,15 @@ class RouteDecision(BaseModel):
 
 async def supervisor(state: State) -> dict:
     system_prompt = """You are a supervisor managing two workers:
-    - researcher: searches for sports information and data
-    - writer: writes articles based on research
-    
-    Given the conversation, decide who should act next.
-    If research has been done and article is written, respond FINISH.
-    """
+        - researcher: searches for sports info using Tavily. Call ONCE only.
+        - writer: writes a sports article from the research. Call ONCE only.
+
+        Follow this STRICT order:
+        1. First call: always route to researcher
+        2. Second call: always route to writer  
+        3. Third call: always return FINISH
+
+        Never loop. Never call the same worker twice."""
     
     supervisor_llm = llm.with_structured_output(RouteDecision)
     
