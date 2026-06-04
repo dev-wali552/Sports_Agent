@@ -8,7 +8,7 @@ from langchain_groq import ChatGroq
 from datetime import datetime , UTC
 from langchain_community.tools.tavily_search import TavilySearchResults
 
-llm = ChatGroq(model="llama-3.1-8b-instant")
+llm = ChatGroq(model="llama-3.3-70b-versatile")
 tavily = TavilySearchResults(max_results = 2)
 
 
