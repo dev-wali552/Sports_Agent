@@ -8,21 +8,18 @@ class RouteDecision(BaseModel):
     next: Literal["researcher", "writer", "FINISH"]
 
 async def supervisor(state: State) -> dict:
-    system_prompt = """You are a supervisor managing two workers:
-        - researcher: searches for sports info using Tavily. Call ONCE only.
-        - writer: writes a sports article from the research. Call ONCE only.
-
-        Follow this STRICT order:
-        1. First call: always route to researcher
-        2. Second call: always route to writer  
-        3. Third call: always return FINISH
-
-        Never loop. Never call the same worker twice."""
+    messages = state["messages"]
     
-    supervisor_llm = llm.with_structured_output(RouteDecision)
-    
-    response = await supervisor_llm.ainvoke(
-        [{"role": "system", "content": system_prompt}, *state["messages"]]
+    # count what's already happened
+    has_research = any(
+        hasattr(m, 'tool_calls') and m.tool_calls 
+        for m in messages
     )
-    
-    return {"next": response.next}
+    has_article = len([m for m in messages if hasattr(m, 'content') and m.content and len(m.content) > 200]) > 1
+
+    if not has_research:
+        return {"next": "researcher"}
+    elif not has_article:
+        return {"next": "writer"}
+    else:
+        return {"next": "FINISH"}
