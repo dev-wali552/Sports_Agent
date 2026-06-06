@@ -22,7 +22,6 @@ async def researcher(state: State) -> Dict[str, List[AIMessage]]:
             [{"role": "system", "content": system_prompt}, *state["messages"]]
         ),
     )
-    print("TOOL CALLS:", response.tool_calls)
     return {"messages": [response]}
 
 async def writer(state:State)-> Dict[str,List[AIMessage]] :
