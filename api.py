@@ -20,7 +20,7 @@ class ChatRequest(BaseModel):
     message: str
     session_id : str
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health():
     return {"status": "ok"}
 
