@@ -1,6 +1,10 @@
-# Sports Agent — AI-Powered Multi-Agent Sports Journalist
+# 🏏🏐🥎Sports Agent — AI-Powered Multi-Agent Sports Journalist🤾‍♂️🏅
 
 A multi-agent system built with **LangGraph** that takes any sports query and automatically researches the web, then writes a clean article — all powered by **Groq's Llama 3.1** and served through a **FastAPI** backend.
+
+**LIVE DEMO: [https://tiny-griffin-dfc226.netlify.app](https://tiny-griffin-dfc226.netlify.app)**
+
+**API: [https://sports-agent-2k73.onrender.com/](https://sports-agent-2k73.onrender.com/)**
 
 ---
 
@@ -41,6 +45,8 @@ Tavily Search Tool
 
 The Supervisor uses **structured output** (Pydantic) to make routing decisions — it always returns one of: `researcher`, `writer`, or `FINISH`.
 
+See [ARCHITECTURE.md](ARCHITECTURE.md) for a full breakdown of each file.
+
 ---
 
 ## Tech Stack
@@ -48,7 +54,7 @@ The Supervisor uses **structured output** (Pydantic) to make routing decisions �
 | Layer | Technology |
 |---|---|
 | Agent Framework | LangGraph |
-| LLM | Groq — `llama-3.1-8b-instant` |
+| LLM | Groq — `llama-3.3-70b-versatile` |
 | Web Search | Tavily Search API |
 | API Server | FastAPI |
 | Memory | LangGraph MemorySaver (in-memory) |
@@ -162,11 +168,5 @@ Built with `StateGraph`, compiled with `MemorySaver` for per-session conversatio
 ---
 
 ## Deployment
-
-The API is CORS-enabled out of the box, making it easy to connect a frontend hosted on a different domain (e.g. Netlify + Render).
-
-To lock down CORS for production, update `allow_origins` in `api.py`:
-
-```python
-allow_origins=["https://your-frontend-url.netlify.app"]
-```
+- **Backend** — Render (free tier). `runtime.txt` pins the Python version. Auto-deploys on push to `main`. Note: free instances sleep after inactivity — first request after idle takes ~50s.
+- **Frontend** — Netlify (drag and drop `index.html`). CORS is scoped to the Netlify URL in `api.py`.
